@@ -1,0 +1,78 @@
+<ion-header>
+
+  <ion-toolbar class="encabezado">
+
+    <ion-grid>
+
+      <ion-row size="12">
+        <ion-col size="4" class="columnaSize">
+          <ion-button routerLink='/home'>
+            <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>
+          </ion-button>
+        </ion-col>
+        <ion-col size="4" class="columnaSize">
+          <ion-text>
+            <h3>MENU</h3>
+          </ion-text>
+        </ion-col>
+        <ion-col size="4" class="columnaSize">
+          <ion-text>
+            <img class="imagen" src="assets/imgs/menu.png">
+          </ion-text>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+
+
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="home">
+ 
+      <ion-card class="cardStyle">
+        <ion-item>
+          <ion-icon name="browsers"></ion-icon>
+          <ion-label>Fisica y Quimica</ion-label>
+          <ion-button ><ion-icon  name = "trash"></ion-icon></ion-button>
+          <ion-button routerLink='/create-demanda'><ion-icon  name = "create"> </ion-icon ></ion-button>
+        </ion-item>
+
+        <ion-card-content>
+         Nivel: Bachillerato
+        </ion-card-content>
+        <ion-card-content>
+          Comunity: INDIVIDUAL
+         </ion-card-content>
+         <ion-card-content>
+          Mobility: AT_HOME
+         </ion-card-content>
+         <ion-card-content>
+          Schedule: MORNING
+         </ion-card-content>
+      </ion-card>
+   
+
+  <ion-grid>
+
+    <ion-tabs>
+
+      <ion-tab-bar>
+        <ion-tab-button routerLink='/create-demanda' tab="create">
+          <ion-icon name="calendar"></ion-icon>
+          <ion-label>
+            Create</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button routerLink='/profileStudent' tab="editprofile">
+          <ion-icon name="contacts"></ion-icon>
+          <ion-label>Edit profile</ion-label>
+        </ion-tab-button>
+
+
+      </ion-tab-bar>
+    </ion-tabs>
+
+  </ion-grid>
+</ion-content>

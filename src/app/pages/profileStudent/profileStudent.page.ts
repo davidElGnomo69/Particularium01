@@ -38,10 +38,9 @@ export class ProfileStudentPage implements OnInit {
   save() {
     this.signUp.addStudent(this.student);
   }
-  //Mapa
-
+  
   ionViewDidEnter() {
-    this.geomap = new Map("myMapStudent");
+    this.geomap = new Map('myMapStudent');
     let searchControl = geosearch().addTo(this.geomap);
     this.showMap();
   }

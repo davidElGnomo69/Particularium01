@@ -29,11 +29,26 @@ const routes: Routes = [
     path: 'profileTeacher',
     loadChildren: () => import('./pages/profileTeacher/profileTeacher.module').then( m => m.ProfileTeacherPageModule)
   },
+  {
+    path: 'menu',
+    loadChildren: () => import('./pages/menu/menu.module').then( m => m.MenuPageModule)
+  },
+  {
+    path: 'create-oferta',
+    loadChildren: () => import('./pages/create-oferta/create-oferta.module').then( m => m.CreateOfertaPageModule)
+  },
+  {
+    path: 'create-demanda',
+    loadChildren: () => import('./pages/create-demanda/create-demanda.module').then( m => m.CreateDemandaPageModule)
+  },
 
-  
-  
+
+
+
+
+
   ];
-  
+
   @NgModule({
 	imports: [
 	  RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
