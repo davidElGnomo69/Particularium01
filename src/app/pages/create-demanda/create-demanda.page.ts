@@ -9,9 +9,9 @@ import { Schedule } from 'src/app/core/model/schedule';
   styleUrls: ['./create-demanda.page.scss'],
 })
 export class CreateDemandaPage implements OnInit {
-  private arrayComunity: Comunity[] = [];
-  private arrayMobility: Mobility[] = [];
-  private arraySchedule: Schedule[] = [];
+  private arrayComunity: string[] = [];
+  private arrayMobility: string[] = [];
+  private arraySchedule: string[] = [];
  
   constructor() {
     for (let index = 0; index < Object.keys(Comunity).length / 2; index++) {

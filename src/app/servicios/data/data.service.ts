@@ -19,9 +19,10 @@ export class DataService {
 	private demands: AngularFirestoreCollection<Demand>;
 	private offers: AngularFirestoreCollection<Offer>;
 	private users: AngularFirestoreCollection<User>;
-	private userLogData:UserInt;
+	private userLogData: UserInt;
 	private resultTeacher: boolean = false;
 	private resultStudent: boolean = false;
+	private resultUser: boolean = false;
 
 	constructor(private afStoreSv: AngularFirestore) {
 		this.students = this.afStoreSv.collection<UserInt>('students');
@@ -32,18 +33,49 @@ export class DataService {
 		this.userLogData = {};
 	}
 	async isMember(idUser: string) {
-		this.resultTeacher = false;
-		await this.getTeacher(idUser).then((data) => {
-			console.log(data);
-			this.resultTeacher = data;
-		});
+		if (this.isStudent(idUser) || this.isTeacher(idUser)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	async isStudent(idUser: string) {
 		await this.getStudent(idUser).then((data) => {
 			console.log(data);
 			this.resultStudent = data;
 		});
 
-		console.log('isTeacher', this.resultTeacher, 'isStudent', this.resultStudent);
-		if (this.resultTeacher || this.resultStudent) {
+		console.log('isStudent', this.resultStudent);
+		if (this.resultStudent) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	async isTeacher(idUser: string) {
+		this.resultTeacher = false;
+		await this.getTeacher(idUser).then((data) => {
+			console.log(data);
+			this.resultTeacher = data;
+		});
+
+		console.log('isTeacher', this.resultTeacher);
+		if (this.resultTeacher) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	async isUser(idUser: string) {
+		this.resultUser = false;
+		await this.getUsers(idUser).then((data) => {
+			console.log(data);
+			this.resultUser = data;
+		});
+		console.log('isUsers', this.resultUser);
+		if (this.resultUser) {
 			return true;
 		} else {
 			return false;
@@ -62,6 +94,20 @@ export class DataService {
 			}, reject);
 		});
 	}
+	async getUsers(idUser: string): Promise<boolean> {
+		return await new Promise((resolve, reject) => {
+			this.users.doc<User>(idUser).valueChanges().subscribe((data) => {
+				if (!isNullOrUndefined(data)) {
+					console.log('data user', data.email);
+					resolve(true);
+				} else {
+					resolve(false);
+				}
+			}, reject);
+		});
+	}
+
+
 
 	async getStudent(idUser: string): Promise<boolean> {
 		return await new Promise((resolve, reject) => {
@@ -85,7 +131,7 @@ export class DataService {
 			.collection('user')
 			.doc(idUser)
 			.update(teacher)
-			.then(function() {
+			.then(function () {
 				console.log('Document successfully updated!');
 			});
 	}
@@ -95,7 +141,7 @@ export class DataService {
 			.collection('user')
 			.doc(idUser)
 			.update(student)
-			.then(function() {
+			.then(function () {
 				console.log('Document successfully updated!');
 			});
 	}
@@ -137,10 +183,10 @@ export class DataService {
 		);
 	}
 
-	addOffer(idUser: string, demand: Offer) {
-		return this.afStoreSv.collection('demands').doc(idUser).set(demand);
+	addOffer(idUser: string, offer: Offer) {
+		return this.afStoreSv.collection('offer').doc(idUser).set(Object.assign({}, offer));
 	}
-	
+
 	getAllOffers() {
 		return this.offers.snapshotChanges().pipe(
 			map((actions) => {
@@ -152,7 +198,8 @@ export class DataService {
 			})
 		);
 	}
-	updateDemand(demand:Demand){
+
+	updateDemand(demand: Demand) {
 		return this.demands.doc().update(demand);
 	}
 }

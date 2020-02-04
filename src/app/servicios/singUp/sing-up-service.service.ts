@@ -42,7 +42,7 @@ export class SingUpServiceService {
 		return await this.afStore
 			.addUserProfile(this.afAuth.getCurrentUserUid(), student)
 			.then(() => {
-				this.routesv.navigateByUrl('/logged-in'); //Siguiente registro
+				this.routesv.navigateByUrl('/menu'); //Siguiente registro
 			})
 			.catch((err) => {
 				console.log(err); //Alerta
@@ -57,7 +57,7 @@ export class SingUpServiceService {
 		return await this.afStore
 			.addUserProfile(this.afAuth.getCurrentUserUid(), teacher)
 			.then(() => {
-				this.routesv.navigateByUrl('/logged-in'); //Siguiente registro
+				this.routesv.navigateByUrl('/menu'); //Siguiente registro
 			})
 			.catch((err) => {
 				console.log(err); //Alerta

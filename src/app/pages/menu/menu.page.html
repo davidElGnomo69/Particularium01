@@ -31,7 +31,7 @@
 
 <ion-content class="home">
  
-      <ion-card class="cardStyle">
+      <ion-card class="cardStyle" *ngFor="let oferta of ofertas">
         <ion-item>
           <ion-icon name="browsers"></ion-icon>
           <ion-label>Fisica y Quimica</ion-label>
@@ -40,16 +40,16 @@
         </ion-item>
 
         <ion-card-content>
-         Nivel: Bachillerato
+         Nivel: {{oferta.$level}}
         </ion-card-content>
         <ion-card-content>
-          Comunity: INDIVIDUAL
+          Comunity: {{oferta.$comunity}}
          </ion-card-content>
          <ion-card-content>
-          Mobility: AT_HOME
+          Mobility: {{oferta.$mobility}}
          </ion-card-content>
          <ion-card-content>
-          Schedule: MORNING
+          Schedule: {{oferta.$schedule}}
          </ion-card-content>
       </ion-card>
    
@@ -59,13 +59,13 @@
     <ion-tabs>
 
       <ion-tab-bar>
-        <ion-tab-button routerLink='/create-demanda' tab="create">
+        <ion-tab-button routerLink='/create-oferta' tab="create">
           <ion-icon name="calendar"></ion-icon>
           <ion-label>
             Create</ion-label>
         </ion-tab-button>
 
-        <ion-tab-button routerLink='/profileStudent' tab="editprofile">
+        <ion-tab-button routerLink='/profileTeacher' tab="editprofile">
           <ion-icon name="contacts"></ion-icon>
           <ion-label>Edit profile</ion-label>
         </ion-tab-button>

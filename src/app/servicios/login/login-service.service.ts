@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class LoginServiceService {
 	private userReg: UserInt = {};
 	private result: boolean = false;
-	constructor(private afAuth: AuthService, private afStore: DataService, private routesv: Router) {}
+	constructor(private afAuth: AuthService, private afStore: DataService, private routesv: Router) { }
 
 	async logout() {
 		this.afAuth.setUser(this.userReg);
@@ -34,13 +34,30 @@ export class LoginServiceService {
 	}
 
 	isMember() {
-		this.afStore.isMember(this.afAuth.getCurrentUserUid()).then((data)=>{
+		this.afStore.isMember(this.afAuth.getCurrentUserUid()).then((data) => {
 			if (data) {
-				this.routesv.navigateByUrl('/logged-in');
-			}else{
+				this.afStore.isUser(this.afAuth.getCurrentUserUid()).then((data) => {
+					if (data) {
+						this.routesv.navigateByUrl('/menu');
+					} else {
+						this.afStore.isTeacher(this.afAuth.getCurrentUserUid()).then((data) => {
+							if (data) {
+								this.routesv.navigateByUrl('/profileTeacher');
+							} else {
+								this.routesv.navigateByUrl('/profileStudent');
+							}
+						});
+					}
+				});
+			} else {
 				this.routesv.navigateByUrl('/tipo-usuario');
 			}
+
 		});
+	}
+
+	async eliminarUsuario() {
+		this.afAuth.deleteUser();
 	}
 
 

@@ -34,11 +34,11 @@
   <ion-card>
     <ion-item >
       <ion-label position="floting">Asignature: </ion-label >
-      <ion-input class="size" type="text" [(ngModel)]="asignature"> </ion-input>
+      <ion-input class="size" type="text" [(ngModel)]="oferta.$subject"> </ion-input>
       </ion-item>
     <ion-item>
-      <ion-label position="floting">Nevel: </ion-label>
-      <ion-input class="size" type="text" [(ngModel)]="nevel"> </ion-input>
+      <ion-label position="floting">Level: </ion-label>
+      <ion-input class="size" type="text" [(ngModel)]="oferta.$level"> </ion-input>
     </ion-item>
   </ion-card>
   <ion-card>
@@ -46,7 +46,7 @@
     
   
       <ion-label position="floting">Comunity: </ion-label>
-      <select class="size" name="comunity" [(ngModel)]="seleccionComunity">
+      <select class="size" name="comunity" [(ngModel)]="oferta.$comunity">
               <option *ngFor="let comunity of arrayCom"> {{comunity}}
         </option>
       </select>
@@ -54,21 +54,21 @@
     </ion-item>
     <ion-item>
       <ion-label position="floting">Mobility: </ion-label>
-      <select class="size" name="mobility" [(ngModel)]="seleccionMobility">
+      <select class="size" name="mobility" [(ngModel)]="oferta.$mobility">
               <option *ngFor="let mobility of arrayMob"> {{mobility}}
         </option>
       </select>
     </ion-item>
     <ion-item>
       <ion-label position="floting">Schedule: </ion-label>
-      <select class="size" name="schedule" [(ngModel)]="seleccionSchedule">
+      <select class="size" name="schedule" [(ngModel)]="oferta.$schedule">
               <option *ngFor="let schedule of arraySche"> {{schedule}}
         </option>
       </select>
     </ion-item>
     <ion-item>
-      <ion-label position="floting">Visibiliy: </ion-label>
-      <ion-checkbox class="size" checked="true"></ion-checkbox>
+      <ion-label position="floting" >Visibiliy: </ion-label>
+      <ion-checkbox class="size" checked="true"  [(ngModel)]="oferta.$visibility"></ion-checkbox>
     </ion-item>
   </ion-card>
   <ion-grid>

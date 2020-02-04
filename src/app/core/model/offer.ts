@@ -3,7 +3,7 @@ import { Comunity } from './comunity';
 import { Schedule } from './schedule';
 
 export class Offer {
-    private id: number;
+    private id: string;
     private subject: string;
     private schedule: Schedule;
     private mobility: Mobility;
@@ -12,22 +12,15 @@ export class Offer {
     private level: string;
 
 
-    constructor($id: number, $subject: string, $schedule: Schedule, $mobility: Mobility, $community: Comunity, $visibility: string, $level: string) {
-        this.id = $id;
-        this.subject = $subject;
-        this.schedule = $schedule;
-        this.mobility = $mobility;
-        this.community = $community;
-        this.visibility = $visibility;
-        this.level = $level;
+    constructor() {
     }
 
 
     /**
      * Getter $id
-     * @return {number}
+     * @return {string}
      */
-    public get $id(): number {
+    public get $id(): string {
         return this.id;
     }
 
@@ -81,9 +74,9 @@ export class Offer {
 
     /**
      * Setter $id
-     * @param {number} value
+     * @param {string} value
      */
-    public set $id(value: number) {
+    public set $id(value: string) {
         this.id = value;
     }
 
