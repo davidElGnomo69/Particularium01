@@ -1,66 +1,75 @@
+import { UserInt } from './../../interfaces/UserInt';
+import { User } from 'src/app/core/model/user';
 import { isNullOrUndefined } from 'util';
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Student } from './../../core/model/student';
 import { Teacher } from './../../core/model/teacher';
-import { User } from './../../interfaces/UserInt';
-import { Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { Demand } from 'src/app/core/model/demand';
+import { Offer } from 'src/app/core/model/offer';
+
 
 @Injectable({
 	providedIn: 'root'
 })
 export class DataService {
-	private students: AngularFirestoreCollection<User>;
-	private teachers: AngularFirestoreCollection<User>;
-	private users: AngularFirestoreCollection<unknown>;
+	private students: AngularFirestoreCollection<UserInt>;
+	private teachers: AngularFirestoreCollection<UserInt>;
+	private demands: AngularFirestoreCollection<Demand>;
+	private offers: AngularFirestoreCollection<Offer>;
+	private users: AngularFirestoreCollection<User>;
+	private userLogData:UserInt;
 	private resultTeacher: boolean = false;
-	private resultStudent : boolean = false;
-	private _isMemberSubscription: Subscription;
+	private resultStudent: boolean = false;
 
 	constructor(private afStoreSv: AngularFirestore) {
-		this.students = this.afStoreSv.collection<User>('students');
-		this.teachers = this.afStoreSv.collection<User>('teachers');
-		this.users = this.afStoreSv.collection<unknown>('user');
+		this.students = this.afStoreSv.collection<UserInt>('students');
+		this.teachers = this.afStoreSv.collection<UserInt>('teachers');
+		this.demands = this.afStoreSv.collection<Demand>('demands');
+		this.offers = this.afStoreSv.collection<Offer>('offers');
+		this.users = this.afStoreSv.collection<User>('user');
+		this.userLogData = {};
 	}
-	 async isMember(idUser: string) {
-		 this.resultTeacher = false;
-		 await this.getTeacher(idUser).then((data)=>{
-			 console.log(data);
+	async isMember(idUser: string) {
+		this.resultTeacher = false;
+		await this.getTeacher(idUser).then((data) => {
+			console.log(data);
 			this.resultTeacher = data;
 		});
-		 await this.getStudent(idUser).then((data)=>{
+		await this.getStudent(idUser).then((data) => {
 			console.log(data);
 			this.resultStudent = data;
 		});
-		
-		console.log("isTeacher",this.resultTeacher , "isStudent", this.resultStudent);
-		 if (this.resultTeacher || this.resultStudent) {
+
+		console.log('isTeacher', this.resultTeacher, 'isStudent', this.resultStudent);
+		if (this.resultTeacher || this.resultStudent) {
 			return true;
 		} else {
 			return false;
 		}
 	}
 
-	async getTeacher(idUser: string):Promise<boolean> {
+	async getTeacher(idUser: string): Promise<boolean> {
 		return await new Promise((resolve, reject) => {
 			this.teachers.doc<User>(idUser).valueChanges().subscribe((data) => {
 				if (!isNullOrUndefined(data)) {
 					console.log('data student', data.email);
 					resolve(true);
-				}else{
+				} else {
 					resolve(false);
 				}
 			}, reject);
 		});
 	}
 
-	async getStudent(idUser: string):Promise<boolean> {
+	async getStudent(idUser: string): Promise<boolean> {
 		return await new Promise((resolve, reject) => {
 			this.students.doc<User>(idUser).valueChanges().subscribe((data) => {
 				if (!isNullOrUndefined(data)) {
 					console.log('data student', data.email);
 					resolve(true);
-				}else{
+				} else {
 					resolve(false);
 				}
 			}, reject);
@@ -75,16 +84,7 @@ export class DataService {
 		return this.afStoreSv
 			.collection('user')
 			.doc(idUser)
-			.update(
-				{
-				name: teacher.name,
-				lastName : teacher.lastname,
-				phone : teacher.$phone,
-				email : teacher.email,
-				password: teacher.password,
-				location : teacher.location
-				}
-			)
+			.update(teacher)
 			.then(function() {
 				console.log('Document successfully updated!');
 			});
@@ -94,66 +94,65 @@ export class DataService {
 		return this.afStoreSv
 			.collection('user')
 			.doc(idUser)
-			.update({
-				name: student.name,
-				lastName : student.lastname,
-				email : student.email,
-				password: student.password,
-				location : student.location
-			})
+			.update(student)
 			.then(function() {
 				console.log('Document successfully updated!');
 			});
 	}
 
 	addTeacherId(idUser: string) {
-		let user: User = {};
-		user.email = idUser;
-		return this.afStoreSv.collection('teachers').doc(idUser).set(user);
+		this.userLogData.idUser = idUser;
+		return this.afStoreSv.collection('teachers').doc(idUser).set(this.userLogData);
 	}
 
 	addStudentId(idUser: string) {
-		let user: User = {};
-		user.email = idUser;
-		return this.afStoreSv.collection('students').doc(idUser).set(user);
+		this.userLogData.idUser = idUser;
+		return this.afStoreSv.collection('students').doc(idUser).set(this.userLogData);
 	}
 
-	
-
-	getProfile(idUser: string) {
-		let user = this.afStoreSv.collection('user').doc(idUser).get();
-		return user
-			.toPromise()
-			.then((doc) => {
-				if (doc.exists) {
-					return doc.data();
-					console.log('Document data:', doc.data());
-				} else {
-					// doc.data() will be undefined in this case
-					console.log('No such document!');
+	async getProfile(idUser: string) {
+		return await new Promise((resolve, reject) => {
+			this.users.doc<any>(idUser).valueChanges().subscribe((data) => {
+				if (!isNullOrUndefined(data)) {
+					console.log('data user', data);
+					resolve(data);
 				}
+			}, reject);
+		});
+	}
+
+	addDemand(idUser: string, demand: Demand) {
+		return this.afStoreSv.collection('demands').doc(idUser).set(demand);
+	}
+
+	getAllDemands() {
+		return this.demands.snapshotChanges().pipe(
+			map((actions) => {
+				return actions.map((a) => {
+					const data = a.payload.doc.data();
+					const id = a.payload.doc.id;
+					return { id, ...data };
+				});
 			})
-			.catch(function(error) {
-				console.log('Error getting document:', error);
-			});
+		);
+	}
+
+	addOffer(idUser: string, demand: Offer) {
+		return this.afStoreSv.collection('demands').doc(idUser).set(demand);
 	}
 	
-	addDemand(idUser:string) {
-		
-	}
-	getDemand() {
-		//to do
-	}
-	getAllDemands() {
-		//to do
-	}
-	addOffer() {
-		//to do
-	}
-	getOffer() {
-		//to do
-	}
 	getAllOffers() {
-		//to do
+		return this.offers.snapshotChanges().pipe(
+			map((actions) => {
+				return actions.map((a) => {
+					const data = a.payload.doc.data();
+					const id = a.payload.doc.id;
+					return { id, ...data };
+				});
+			})
+		);
+	}
+	updateDemand(demand:Demand){
+		return this.demands.doc().update(demand);
 	}
 }

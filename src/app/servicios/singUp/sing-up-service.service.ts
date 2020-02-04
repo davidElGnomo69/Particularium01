@@ -1,9 +1,9 @@
+import { UserInt } from './../../interfaces/UserInt';
 import { Teacher } from './../../core/model/teacher';
 import { Student } from './../../core/model/student';
 import { Injectable } from '@angular/core';
 
 import { Router } from '@angular/router';
-import { User } from 'src/app/interfaces/UserInt';
 import { AlertController } from '@ionic/angular';
 import { AuthService } from '../auth/auth.service';
 import { DataService } from '../data/data.service';
@@ -12,7 +12,7 @@ import { DataService } from '../data/data.service';
 	providedIn: 'root'
 })
 export class SingUpServiceService {
-	private userReg: User = {};
+	private userReg: UserInt = {};
 
 	constructor(
 		private afAuth: AuthService,
@@ -91,7 +91,7 @@ export class SingUpServiceService {
      * Getter $userReg
      * @return {User }
      */
-	public get $userReg(): User {
+	public get $userReg(): UserInt {
 		return this.userReg;
 	}
 
@@ -99,7 +99,7 @@ export class SingUpServiceService {
      * Setter $userReg
      * @param {User } value
      */
-	public set $userReg(value: User) {
+	public set $userReg(value: UserInt) {
 		this.userReg = value;
 	}
 	async showAlert(header: string, message: string) {

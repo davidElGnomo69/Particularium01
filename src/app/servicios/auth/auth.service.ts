@@ -1,12 +1,13 @@
-import { User } from '../../interfaces/UserInt';
+import { UserInt } from './../../interfaces/UserInt';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Injectable } from '@angular/core';
+
 import { Authable } from 'src/app/interfaces/authable';
 
 @Injectable()
 export class AuthService implements Authable {
 
-	private user: User = {};
+	private user: UserInt = {};
 
 	constructor(private afAuth: AngularFireAuth) { }
 	async regis(email: string, password: string, cpassword: string) {

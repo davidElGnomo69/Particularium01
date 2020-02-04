@@ -1,5 +1,6 @@
-export interface User {
+export interface UserInt {
     email?: string,
     password?: string,
     cpassword?: string;
+    idUser?: String;
 }

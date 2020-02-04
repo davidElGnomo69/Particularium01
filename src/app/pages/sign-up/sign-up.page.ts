@@ -1,6 +1,5 @@
-
+import { UserInt } from './../../interfaces/UserInt';
 import { Component, OnInit } from '@angular/core';
-import { User } from 'src/app/interfaces/UserInt';
 import { SingUpServiceService } from 'src/app/servicios/singUp/sing-up-service.service';
 
 
@@ -10,7 +9,7 @@ import { SingUpServiceService } from 'src/app/servicios/singUp/sing-up-service.s
   styleUrls: ['./sign-up.page.scss'],
 })
 export class SignUpPage implements OnInit {
-  private userReg: User = {};
+  private userReg: UserInt = {};
 
   constructor(private servSingUp: SingUpServiceService) { 
     this.servSingUp.$userReg = this.userReg;
