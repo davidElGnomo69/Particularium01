@@ -15,7 +15,7 @@ export class FilterMock implements Filtrable {
     filtrar(todasOfertas: import("../core/model/offer").Offer[], demandaBuscada: import("../core/model/demand").Demand): Offer[] {
         var ofertasFiltradas: Offer[] = new Array();
         todasOfertas.forEach(oferta => {
-            if (oferta.$subject === demandaBuscada.$subject || oferta.$level === demandaBuscada.$level || oferta.$schedule === demandaBuscada.$schedule || oferta.$community === demandaBuscada.$community || oferta.$mobility === demandaBuscada.$mobility) {
+            if (oferta.subject === demandaBuscada.$subject || oferta.level === demandaBuscada.$level || oferta.schedule === demandaBuscada.$schedule || oferta.community === demandaBuscada.$community || oferta.mobility === demandaBuscada.$mobility) {
                 ofertasFiltradas.push(oferta);
             }
         });

@@ -184,7 +184,7 @@ export class DataService {
 	}
 
 	addOffer(idUser: string, offer: Offer) {
-		return this.afStoreSv.collection('offer').doc(offer.$id).set(Object.assign({}, offer));
+		return this.afStoreSv.collection('offer').doc(offer.id).set(Object.assign({}, offer));
 	}
 
 	getAllOffers() {
