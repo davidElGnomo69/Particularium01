@@ -9,7 +9,7 @@ export class FilterMock implements Filtrable {
     private offers: Offer[] = new Array();
 
     constructor() {
-        this.offers.push(new Offer('1', "Bio", Schedule.MORNING, Mobility.OWN_LOCAL, Comunity.GROUP, "visible", "second grade"));
+        this.offers.push(new Offer());
     }
 
     filtrar(todasOfertas: import("../core/model/offer").Offer[], demandaBuscada: import("../core/model/demand").Demand): Offer[] {

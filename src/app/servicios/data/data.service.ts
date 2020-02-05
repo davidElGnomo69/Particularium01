@@ -27,8 +27,8 @@ export class DataService {
 	constructor(private afStoreSv: AngularFirestore) {
 		this.students = this.afStoreSv.collection<UserInt>('students');
 		this.teachers = this.afStoreSv.collection<UserInt>('teachers');
-		this.demands = this.afStoreSv.collection<Demand>('demands');
-		this.offers = this.afStoreSv.collection<Offer>('offers');
+		this.demands = this.afStoreSv.collection<Demand>('demand');
+		this.offers = this.afStoreSv.collection<Offer>('offer');
 		this.users = this.afStoreSv.collection<User>('user');
 		this.userLogData = {};
 	}
@@ -184,7 +184,7 @@ export class DataService {
 	}
 
 	addOffer(idUser: string, offer: Offer) {
-		return this.afStoreSv.collection('offer').doc(idUser).set(Object.assign({}, offer));
+		return this.afStoreSv.collection('offer').doc(offer.$id).set(Object.assign({}, offer));
 	}
 
 	getAllOffers() {
@@ -197,6 +197,16 @@ export class DataService {
 				});
 			})
 		);
+	}
+
+	async getAllOffersDos() {
+		var todasOfertas;
+		return await new Promise((resolve, reject) => {
+			this.getAllOffers().subscribe((data: Offer[]) => {
+				todasOfertas = data;
+				resolve(todasOfertas);
+			});
+		});
 	}
 
 	updateDemand(demand: Demand) {

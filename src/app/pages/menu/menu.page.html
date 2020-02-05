@@ -34,22 +34,22 @@
       <ion-card class="cardStyle" *ngFor="let oferta of ofertas">
         <ion-item>
           <ion-icon name="browsers"></ion-icon>
-          <ion-label>Fisica y Quimica</ion-label>
+          <ion-label>{{oferta.subject}}</ion-label>
           <ion-button ><ion-icon  name = "trash"></ion-icon></ion-button>
           <ion-button routerLink='/create-demanda'><ion-icon  name = "create"> </ion-icon ></ion-button>
         </ion-item>
 
         <ion-card-content>
-         Nivel: {{oferta.$level}}
+         Nivel: {{oferta.level}}
         </ion-card-content>
         <ion-card-content>
           Comunity: {{oferta.$comunity}}
          </ion-card-content>
          <ion-card-content>
-          Mobility: {{oferta.$mobility}}
+          Mobility: {{oferta.mobility}}
          </ion-card-content>
          <ion-card-content>
-          Schedule: {{oferta.$schedule}}
+          Schedule: {{oferta.schedule}}
          </ion-card-content>
       </ion-card>
    

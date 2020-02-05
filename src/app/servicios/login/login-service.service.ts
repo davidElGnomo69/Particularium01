@@ -42,9 +42,9 @@ export class LoginServiceService {
 					} else {
 						this.afStore.isTeacher(this.afAuth.getCurrentUserUid()).then((data) => {
 							if (data) {
-								this.routesv.navigateByUrl('/profileTeacher');
-							} else {
 								this.routesv.navigateByUrl('/profileStudent');
+							} else {
+								this.routesv.navigateByUrl('/profileTeacher');
 							}
 						});
 					}
