@@ -6,7 +6,7 @@
 
       <ion-row size="12">
         <ion-col size="4" class="columnaSize">
-          <ion-button routerLink='/menu'>
+          <ion-button routerLink='/menu-demanda'>
             <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>
           </ion-button>
         </ion-col>
@@ -34,15 +34,15 @@
   <ion-card>
     <ion-item >
       <ion-label position="floting">Asignature: </ion-label >
-      <ion-input class="size" type="text" [(ngModel)]="asignature"> </ion-input>
+      <ion-input class="size" type="text" [(ngModel)]="demanda.subject" aria-placeholder=""> </ion-input>
       </ion-item>
     <ion-item>
       <ion-label position="floting">Nevel: </ion-label>
-      <ion-input class="size" type="text" [(ngModel)]="nevel"> </ion-input>
+      <ion-input class="size" type="text" [(ngModel)]="demanda.level" aria-placeholder=""> </ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floting">Title: </ion-label>
-      <ion-input class="size" type="text" [(ngModel)]="title"> </ion-input>
+      <ion-input class="size" type="text" [(ngModel)]="demanda.title" aria-placeholder=""> </ion-input>
     </ion-item>
   </ion-card>
 
@@ -52,7 +52,7 @@
     
   
       <ion-label position="floting">Comunity: </ion-label>
-      <select class="size" name="comunity" [(ngModel)]="seleccionComunity">
+      <select class="size" name="comunity" [(ngModel)]="demanda.community">
               <option *ngFor="let comunity of arrayCom"> {{comunity}}
         </option>
       </select>
@@ -60,14 +60,14 @@
     </ion-item>
     <ion-item>
       <ion-label position="floting">Mobility: </ion-label>
-      <select class="size" name="mobility" [(ngModel)]="seleccionMobility">
+      <select class="size" name="mobility" [(ngModel)]="demanda.mobility">
               <option *ngFor="let mobility of arrayMob"> {{mobility}}
         </option>
       </select>
     </ion-item>
     <ion-item>
       <ion-label position="floting">Schedule: </ion-label>
-      <select class="size" name="schedule" [(ngModel)]="seleccionSchedule">
+      <select class="size" name="schedule" [(ngModel)]="demanda.schedule">
               <option *ngFor="let schedule of arraySche"> {{schedule}}
         </option>
       </select>
@@ -80,7 +80,7 @@
         <ion-button color="#3b5999" class="buttonAceptar" (click)="save()">Save</ion-button>
       </ion-col>
       <ion-col size="6">
-        <ion-button color="#3b5999" class="buttonCancel" (click)="Cancel()">Cancel</ion-button>
+        <ion-button color="#3b5999" class="buttonCancel" (click)="cancel()">Cancel</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>

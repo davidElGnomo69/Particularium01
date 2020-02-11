@@ -27,13 +27,23 @@ export class DataService {
 	constructor(private afStoreSv: AngularFirestore) {
 		this.students = this.afStoreSv.collection<UserInt>('students');
 		this.teachers = this.afStoreSv.collection<UserInt>('teachers');
-		this.demands = this.afStoreSv.collection<Demand>('demand');
+		this.demands = this.afStoreSv.collection<Demand>('demands');
 		this.offers = this.afStoreSv.collection<Offer>('offer');
 		this.users = this.afStoreSv.collection<User>('user');
 		this.userLogData = {};
 	}
 	async isMember(idUser: string) {
-		if (this.isStudent(idUser) || this.isTeacher(idUser)) {
+		this.resultTeacher = false;
+		await this.getTeacher(idUser).then((data) => {
+			console.log(data);
+			this.resultTeacher = data;
+		});
+		await this.getStudent(idUser).then((data) => {
+			console.log(data);
+			this.resultStudent = data;
+		});
+		console.log('isTeacher', this.resultTeacher, 'isStudent', this.resultStudent);
+		if (this.resultTeacher || this.resultStudent) {
 			return true;
 		} else {
 			return false;
@@ -123,6 +133,8 @@ export class DataService {
 	}
 
 	addUserProfile(idUser: string, user: Teacher | Student) {
+		console.log('UsuarioData', user);
+		console.log('IdUsuarioData', idUser);
 		return this.afStoreSv.collection('user').doc(idUser).set(Object.assign({}, user));
 	}
 
@@ -168,7 +180,13 @@ export class DataService {
 	}
 
 	addDemand(idUser: string, demand: Demand) {
-		return this.afStoreSv.collection('demands').doc(idUser).set(demand);
+		return this.afStoreSv.collection('demands').doc(demand.id).set(Object.assign({}, demand));
+	}
+
+
+
+	addOffer(idUser: string, offer: Offer) {
+		return this.afStoreSv.collection('offer').doc(offer.id).set(Object.assign({}, offer));
 	}
 
 	getAllDemands() {
@@ -181,10 +199,6 @@ export class DataService {
 				});
 			})
 		);
-	}
-
-	addOffer(idUser: string, offer: Offer) {
-		return this.afStoreSv.collection('offer').doc(offer.id).set(Object.assign({}, offer));
 	}
 
 	getAllOffers() {
@@ -208,8 +222,33 @@ export class DataService {
 			});
 		});
 	}
+	async getAllDemandsDos() {
+		var todasDemands;
+		return await new Promise((resolve, reject) => {
+			this.getAllDemands().subscribe((data: Demand[]) => {
+				todasDemands = data;
+				resolve(todasDemands);
+			});
+		});
+	}
 
 	updateDemand(demand: Demand) {
 		return this.demands.doc().update(demand);
+	}
+
+	deleteUser(idUser: string) {
+		this.afStoreSv.collection('user').doc(idUser).delete();
+	}
+	deleteOferta(id: string) {
+		this.afStoreSv.collection('offer').doc(id).delete();
+	}
+	deleteDemanda(id: string) {
+		this.afStoreSv.collection('demands').doc(id).delete();
+	}
+	deleteTeacher(id: string) {
+		this.afStoreSv.collection('teachers').doc(id).delete();
+	}
+	deleteStudent(id: string) {
+		this.afStoreSv.collection('students').doc(id).delete();
 	}
 }

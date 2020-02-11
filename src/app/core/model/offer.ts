@@ -3,14 +3,14 @@ import { Comunity } from './comunity';
 import { Schedule } from './schedule';
 
 export class Offer {
-    private _id: string;
-    private _idUser: string;
-    private _subject: string;
-    private _schedule: Schedule;
-    private _mobility: Mobility;
-    private _community: Comunity;
-    private _visibility: string;
-    private _level: string;
+    public _id: string;
+    public _idUser: string;
+    public _subject: string;
+    public _schedule: Schedule;
+    public _mobility: Mobility;
+    public _comunity: Comunity;
+    public _visibility: string;
+    public _level: string;
 
 
     constructor() {
@@ -60,11 +60,11 @@ export class Offer {
 	}
 
     /**
-     * Getter community
+     * Getter comunity
      * @return {Comunity}
      */
-	public get community(): Comunity {
-		return this._community;
+	public get comunity(): Comunity {
+		return this._comunity;
 	}
 
     /**
@@ -124,11 +124,11 @@ export class Offer {
 	}
 
     /**
-     * Setter community
+     * Setter comunity
      * @param {Comunity} value
      */
-	public set community(value: Comunity) {
-		this._community = value;
+	public set comunity(value: Comunity) {
+		this._comunity = value;
 	}
 
     /**

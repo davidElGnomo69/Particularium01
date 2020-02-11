@@ -3,137 +3,148 @@ import { Mobility } from './mobility';
 import { Schedule } from './schedule';
 
 export class Demand {
-    private id: string;
-    private subject: string;
-    private schedule: Schedule;
-    private mobility: Mobility;
-    private community: Comunity;
-    private title: string;
-    private level: string;
+    public _id: string;
+    public _idUser: string;
+    public _subject: string;
+    public _schedule: Schedule;
+    public _mobility: Mobility;
+    public _comunity: Comunity;
+    public _title: string;
+    public _level: string;
 
 
-    constructor($id: string, $subject: string, $schedule: Schedule, $mobility: Mobility, $community: Comunity, $title: string, $level: string) {
-        this.id = $id;
-        this.subject = $subject;
-        this.schedule = $schedule;
-        this.mobility = $mobility;
-        this.community = $community;
-        this.title = $title;
-        this.level = $level;
+    constructor() {
     }
 
 
     /**
-     * Getter $id
+     * Getter id
      * @return {string}
      */
-    public get $id(): string {
-        return this.id;
+    public get id(): string {
+        return this._id;
     }
 
     /**
-     * Getter $subject
+     * Getter idUser
      * @return {string}
      */
-    public get $subject(): string {
-        return this.subject;
+    public get idUser(): string {
+        return this._idUser;
     }
 
     /**
-     * Getter $schedule
+     * Getter subject
+     * @return {string}
+     */
+    public get subject(): string {
+        return this._subject;
+    }
+
+    /**
+     * Getter schedule
      * @return {Schedule}
      */
-    public get $schedule(): Schedule {
-        return this.schedule;
+    public get schedule(): Schedule {
+        return this._schedule;
     }
 
     /**
-     * Getter $mobility
+     * Getter mobility
      * @return {Mobility}
      */
-    public get $mobility(): Mobility {
-        return this.mobility;
+    public get mobility(): Mobility {
+        return this._mobility;
     }
 
     /**
-     * Getter $community
+     * Getter comunity
      * @return {Comunity}
      */
-    public get $community(): Comunity {
-        return this.community;
+    public get comunity(): Comunity {
+        return this._comunity;
     }
 
     /**
-     * Getter $title
+     * Getter title
      * @return {string}
      */
-    public get $title(): string {
-        return this.title;
+    public get title(): string {
+        return this._title;
     }
 
     /**
-     * Getter $level
+     * Getter level
      * @return {string}
      */
-    public get $level(): string {
-        return this.level;
+    public get level(): string {
+        return this._level;
     }
 
     /**
-     * Setter $id
+     * Setter id
      * @param {string} value
      */
-    public set $id(value: string) {
-        this.id = value;
+    public set id(value: string) {
+        this._id = value;
     }
 
     /**
-     * Setter $subject
+     * Setter idUser
      * @param {string} value
      */
-    public set $subject(value: string) {
-        this.subject = value;
+    public set idUser(value: string) {
+        this._idUser = value;
     }
 
     /**
-     * Setter $schedule
+     * Setter subject
+     * @param {string} value
+     */
+    public set subject(value: string) {
+        this._subject = value;
+    }
+
+    /**
+     * Setter schedule
      * @param {Schedule} value
      */
-    public set $schedule(value: Schedule) {
-        this.schedule = value;
+    public set schedule(value: Schedule) {
+        this._schedule = value;
     }
 
     /**
-     * Setter $mobility
+     * Setter mobility
      * @param {Mobility} value
      */
-    public set $mobility(value: Mobility) {
-        this.mobility = value;
+    public set mobility(value: Mobility) {
+        this._mobility = value;
     }
 
     /**
-     * Setter $community
+     * Setter community
      * @param {Comunity} value
      */
-    public set $community(value: Comunity) {
-        this.community = value;
+    public set comunity(value: Comunity) {
+        this._comunity = value;
     }
 
     /**
-     * Setter $title
+     * Setter title
      * @param {string} value
      */
-    public set $title(value: string) {
-        this.title = value;
+    public set title(value: string) {
+        this._title = value;
     }
 
     /**
-     * Setter $level
+     * Setter level
      * @param {string} value
      */
-    public set $level(value: string) {
-        this.level = value;
+    public set level(value: string) {
+        this._level = value;
     }
+
 
 
 }

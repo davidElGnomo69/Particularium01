@@ -15,7 +15,7 @@ export class CreateOfertaPage implements OnInit {
   private arrayComunity: string[] = [];
   private arrayMobility: string[] = [];
   private arraySchedule: string[] = [];
-  private oferta= new Offer();
+  private oferta = new Offer();
 
   constructor(private ofertaServ: DemandOfferService) {
     for (let index = 0; index < Object.keys(Comunity).length / 2; index++) {
@@ -56,7 +56,7 @@ export class CreateOfertaPage implements OnInit {
   }
 
   save(){
-    console.log(this.oferta)
+    console.log(this.oferta);
     this.ofertaServ.crearOferta(this.oferta);
   }
 

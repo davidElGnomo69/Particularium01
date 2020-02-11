@@ -10,11 +10,15 @@ export class Filtro implements Filtrable {
     private _demanda: Demand;
 
     filtrar(todasOfertas: import('../model/offer').Offer[], demandaBuscada: import('../model/demand').Demand): import('../model/offer').Offer[] {
-
+        
+        console.log('Filtro');
+        console.log(demandaBuscada);
+        console.log(todasOfertas);
         this.todasOfertas = todasOfertas;
         this.demanda = demandaBuscada;
         this.ofertasEncontradas = [];
         this.comprobarMateria();
+        console.log('Encontradas', this.ofertasEncontradas);
         return this.ofertasEncontradas;
         throw new Error('Method not implemented.');
 
@@ -23,34 +27,41 @@ export class Filtro implements Filtrable {
 
     private comprobarMateria() {
         this.todasOfertas.forEach(element => {
-            this.ofertasEncontradas = [];
-            if (this.demanda.$subject === undefined) {
+            if (this.demanda._subject === undefined) {
+                console.log('materia indefinida');
                 this.comprobarNivel(element);
-            } else if (this.demanda.$subject === element.$subject) {
+            } else if (this.demanda._subject === element._subject) {
+                console.log('materia igual');
                 this.comprobarNivel(element);
             }
 
         });
     }
     private comprobarNivel(demanda) {
-        if (this.demanda.$level === undefined) {
+        if (this.demanda._level === undefined) {
+            console.log('nivel indefinida');
             this.comprobarModelo(demanda);
-        } else if (this.demanda.$level === demanda.$level) {
+        } else if (this.demanda._level === demanda._level) {
+            console.log('nivel igual');
             this.comprobarModelo(demanda);
         }
     }
     private comprobarModelo(demanda) {
-        if (this.demanda.$community === undefined) {
+        if (this.demanda._comunity === undefined) {
+            console.log('cumunity indefinida');
             this.comprobarModalidad(demanda);
-        } else if (this.demanda.$community === demanda.$community) {
+        } else if (this.demanda._comunity === demanda._community) {
+            console.log('comunity igual');
             this.comprobarModalidad(demanda);
         }
     }
     private comprobarModalidad(demanda) {
 
-        if (this.demanda.$mobility === undefined) {
+        if (this.demanda._mobility === undefined) {
+            console.log('mobility indefinida');
             this.ofertasEncontradas.push(demanda);
-        } else if (this.demanda.$mobility === demanda.$mobility) {
+        } else if (this.demanda._mobility === demanda._mobility) {
+            console.log('mobility igual');
             this.ofertasEncontradas.push(demanda);
         }
     }

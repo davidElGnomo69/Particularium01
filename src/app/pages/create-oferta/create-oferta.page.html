@@ -32,43 +32,40 @@
 
 
   <ion-card>
-    <ion-item >
-      <ion-label position="floting">Asignature: </ion-label >
-      <ion-input class="size" type="text" [(ngModel)]="oferta.$subject"> </ion-input>
-      </ion-item>
+    <ion-item>
+      <ion-label position="floting">Asignature: </ion-label>
+      <ion-input class="size" type="text" [(ngModel)]="oferta.subject" aria-placeholder=""> </ion-input>
+    </ion-item>
     <ion-item>
       <ion-label position="floting">Level: </ion-label>
-      <ion-input class="size" type="text" [(ngModel)]="oferta.$level"> </ion-input>
+      <ion-input class="size" type="text" [(ngModel)]="oferta.level" aria-placeholder=""> </ion-input>
     </ion-item>
   </ion-card>
   <ion-card>
     <ion-item>
-    
-  
       <ion-label position="floting">Comunity: </ion-label>
-      <select class="size" name="comunity" [(ngModel)]="oferta.$comunity">
-              <option *ngFor="let comunity of arrayCom"> {{comunity}}
+      <select class="size" name="comunity" [(ngModel)]="oferta.comunity">
+        <option *ngFor="let comunity of arrayCom"> {{comunity}}
         </option>
       </select>
-      
     </ion-item>
     <ion-item>
       <ion-label position="floting">Mobility: </ion-label>
-      <select class="size" name="mobility" [(ngModel)]="oferta.$mobility">
-              <option *ngFor="let mobility of arrayMob"> {{mobility}}
+      <select class="size" name="mobility" [(ngModel)]="oferta.mobility">
+        <option *ngFor="let mobility of arrayMob"> {{mobility}}
         </option>
       </select>
     </ion-item>
     <ion-item>
       <ion-label position="floting">Schedule: </ion-label>
-      <select class="size" name="schedule" [(ngModel)]="oferta.$schedule">
-              <option *ngFor="let schedule of arraySche"> {{schedule}}
+      <select class="size" name="schedule" [(ngModel)]="oferta.schedule">
+        <option *ngFor="let schedule of arraySche"> {{schedule}}
         </option>
       </select>
     </ion-item>
     <ion-item>
-      <ion-label position="floting" >Visibiliy: </ion-label>
-      <ion-checkbox class="size" checked="true"  [(ngModel)]="oferta.$visibility"></ion-checkbox>
+      <ion-label position="floting">Visibiliy: </ion-label>
+      <ion-checkbox class="size" checked="true" [(ngModel)]="oferta.visibility"></ion-checkbox>
     </ion-item>
   </ion-card>
   <ion-grid>
@@ -77,7 +74,7 @@
         <ion-button color="#3b5999" class="buttonAceptar" (click)="save()">Save</ion-button>
       </ion-col>
       <ion-col size="6">
-        <ion-button color="#3b5999" class="buttonCancel" (click)="Cancel()">Cancel</ion-button>
+        <ion-button color="#3b5999" class="buttonCancel" (click)="cancel()">Cancel</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>
