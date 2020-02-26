@@ -122,7 +122,7 @@ export class Demand {
     }
 
     /**
-     * Setter community
+     * Setter comunity
      * @param {Comunity} value
      */
     public set comunity(value: Comunity) {

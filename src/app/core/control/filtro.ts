@@ -7,10 +7,10 @@ export class Filtro implements Filtrable {
 
     private _ofertasEncontradas: Offer[];
     private _todasOfertas: Offer[];
-    private _demanda: Demand;
+    private _demanda: any;
 
     filtrar(todasOfertas: import('../model/offer').Offer[], demandaBuscada: import('../model/demand').Demand): import('../model/offer').Offer[] {
-        
+
         console.log('Filtro');
         console.log(demandaBuscada);
         console.log(todasOfertas);
@@ -19,6 +19,7 @@ export class Filtro implements Filtrable {
         this.ofertasEncontradas = [];
         this.comprobarMateria();
         console.log('Encontradas', this.ofertasEncontradas);
+        console.log('Buscada', this.demanda);
         return this.ofertasEncontradas;
         throw new Error('Method not implemented.');
 
@@ -50,7 +51,7 @@ export class Filtro implements Filtrable {
         if (this.demanda._comunity === undefined) {
             console.log('cumunity indefinida');
             this.comprobarModalidad(demanda);
-        } else if (this.demanda._comunity === demanda._community) {
+        } else if (this.demanda._comunity === demanda._comunity) {
             console.log('comunity igual');
             this.comprobarModalidad(demanda);
         }
